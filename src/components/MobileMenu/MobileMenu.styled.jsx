@@ -16,6 +16,7 @@ export const MenuContainer = styled.div`
 
   text-align: center;
 
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
 
   ul {
