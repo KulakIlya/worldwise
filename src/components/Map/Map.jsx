@@ -1,6 +1,9 @@
+import L from 'leaflet';
 import { useEffect } from 'react';
 import { TileLayer, useMapEvents } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import debounce from 'lodash.debounce';
 import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { getCurrentPlace, getUserPlaces } from '../../redux/map/operations';
@@ -10,10 +13,20 @@ import LocationButton from '../LocationButton/LocationButton';
 import LocationMarker from '../LocationMarker';
 import Markers from '../Markers/';
 
-import debounce from 'lodash.debounce';
-import { ToastContainer, toast } from 'react-toastify';
 import useLocalStorage from '../../hooks/useLocalStorage';
+
+import 'leaflet/dist/leaflet.css';
 import { MapWrapper } from './Map.styled';
+
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+const DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 const showError = message => toast.error(message);
 
