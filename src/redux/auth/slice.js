@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import { signIn, signOut, signUp } from './operations';
 
-const initialState = {
+export const initialState = {
   username: '',
   email: '',
   id: '',

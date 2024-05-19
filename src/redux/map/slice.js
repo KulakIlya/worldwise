@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getFlagEmoji } from '../../helpers';
 import { addPlace, getCurrentPlace, getUserPlaces, removePlace } from './operations';
 
-const initialState = {
+export const initialState = {
   places: [],
   currentPlace: null,
   isLoading: false,
