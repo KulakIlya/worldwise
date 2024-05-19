@@ -11,7 +11,6 @@ const FormLabel = ({ type, register, error }) => {
           {...register('username')}
           autoComplete="name"
           placeholder="JamesHolland"
-          defaultValue="Test Username"
         />
         {error && <ErrorMessage>{error.message}</ErrorMessage>}
       </Label>
@@ -25,7 +24,6 @@ const FormLabel = ({ type, register, error }) => {
           {...register('email')}
           autoComplete="email"
           placeholder="example@mail.com"
-          defaultValue="test123@gmail.com"
         />
         {error && <ErrorMessage>{error.message}</ErrorMessage>}
       </Label>
@@ -34,12 +32,7 @@ const FormLabel = ({ type, register, error }) => {
     return (
       <Label>
         <span>Enter password</span>
-        <input
-          type="password"
-          {...register('password')}
-          autoComplete="current-password"
-          defaultValue="123123123"
-        />
+        <input type="password" {...register('password')} autoComplete="current-password" />
         {error && <ErrorMessage>{error.message}</ErrorMessage>}
       </Label>
     );
