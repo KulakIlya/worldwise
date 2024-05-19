@@ -10,7 +10,7 @@ import LocationButton from '../LocationButton/LocationButton';
 import LocationMarker from '../LocationMarker';
 import Markers from '../Markers/';
 
-import { debounce } from 'lodash';
+import debounce from 'lodash.debounce';
 import { ToastContainer, toast } from 'react-toastify';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { MapWrapper } from './Map.styled';
