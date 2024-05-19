@@ -8,6 +8,7 @@ import store, { persistor } from './redux/store';
 
 import App from './components/App/';
 
+import 'leaflet/dist/leaflet.css';
 import 'modern-normalize';
 import 'react-toastify/dist/ReactToastify.css';
 
