@@ -131,8 +131,9 @@ export const ButtonWrapper = styled.div`
     position: absolute;
     z-index: -1;
     display: inline-block;
-    width: 40px;
-    height: 40px;
+
+    width: 50px;
+    height: 50px;
 
     border-radius: 50%;
 
@@ -153,13 +154,19 @@ export const OpenButton = styled(CloseButton)`
   align-items: center;
   justify-content: center;
 
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
 
   background-color: ${props => props.theme.colors.colorBrand2};
   color: ${props => props.theme.colors.colorLight2};
 
   border-radius: 50%;
+
+  svg {
+    display: inline-block;
+    position: absolute;
+    z-index: 999;
+  }
 `;
 
 export const RightSide = styled.div`
