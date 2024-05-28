@@ -51,7 +51,7 @@ const MapPage = () => {
           <NavLink to="countries">Countries</NavLink>
         </ButtonGroup>
 
-        <Outlet context={[isAnimated, setIsAnimated]} />
+        <Outlet context={{ setIsAnimated, setIsLeftSideOpened }} />
 
         <UserInfo />
         <CopyRight>&copy; 2024 by WorldWise Inc.</CopyRight>
@@ -60,7 +60,7 @@ const MapPage = () => {
         </CloseButton>
       </LeftSide>
       <RightSide>
-        <Map onAddAnimation={handleAddAnimation} />
+        <Map onAddAnimation={handleAddAnimation} onLeftSideOpen={onLeftSideOpen} />
 
         <ButtonWrapper $isAnimated={isAnimated}>
           <div></div>

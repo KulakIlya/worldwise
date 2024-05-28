@@ -2,24 +2,17 @@ import { Popup } from 'react-leaflet';
 import styled from 'styled-components';
 
 export const CustomPopup = styled(Popup)`
-  /* margin: 0;
-  .wrapper {
-    width: 100%;
-    height: 100%;
+  a,
+  button {
+    text-decoration: none;
+    color: ${props => props.theme.colors.colorLight3} !important;
 
-    background-color: ${props => props.theme.colors.colorDark1};
-
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 10px;
-    min-width: 86px;
-    text-align: center;
-    font-size: 15px;
+    gap: 12px;
 
-    color: ${props => props.theme.colors.colorLight2};
+    border: none;
+    background-color: transparent;
+    font-size: inherit;
   }
-
-  .flag {
-    font-size: 25px;
-  } */
 `;

@@ -22,7 +22,7 @@ const VALIDATION_SCHEMA = Yup.object().shape({
 });
 
 const MapForm = () => {
-  const [, setIsAnimated] = useOutletContext();
+  const { setIsAnimated } = useOutletContext();
 
   const removeAnimation = () => setIsAnimated(false);
 

@@ -64,7 +64,7 @@ const ChangeCenter = ({ onAddAnimation, center, onZoomChange }) => {
   return null;
 };
 
-const Map = ({ onAddAnimation }) => {
+const Map = ({ onAddAnimation, onLeftSideOpen }) => {
   const [getConfig, changeConfig] = useLocalStorage();
 
   const handleZoomChange = newValue => changeConfig('zoom', newValue);
@@ -96,11 +96,12 @@ const Map = ({ onAddAnimation }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Markers places={places} />
-        {currentPlace && <LocationMarker place={currentPlace} />}
+        <Markers places={places} onLeftSideOpen={onLeftSideOpen} />
+        {currentPlace && <LocationMarker onLeftSideOpen={onLeftSideOpen} place={currentPlace} />}
         <LocationButton />
         <ChangeCenter
           onAddAnimation={onAddAnimation}
+          onLeftSideOpen={onLeftSideOpen}
           center={currentCoords}
           onZoomChange={handleZoomChange}
         />
