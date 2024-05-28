@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { selectCoords } from '../../redux/map/selectors';
 import {
   ButtonGroup,
+  ButtonWrapper,
   CloseButton,
   CopyRight,
   LeftSide,
@@ -24,6 +25,9 @@ import {
 
 const MapPage = () => {
   const [isLeftSideOpened, setIsLeftSideOpened] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(false);
+
+  const handleAddAnimation = () => setIsAnimated(true);
 
   const currentCoords = useSelector(selectCoords);
 
@@ -39,7 +43,7 @@ const MapPage = () => {
   return (
     <Wrapper>
       <LeftSide $isOpened={isLeftSideOpened}>
-        <Link to="/ ">
+        <Link to="/">
           <img src={logo} alt="Worldwise logo" width="218" />
         </Link>
         <ButtonGroup>
@@ -47,7 +51,7 @@ const MapPage = () => {
           <NavLink to="countries">Countries</NavLink>
         </ButtonGroup>
 
-        <Outlet />
+        <Outlet context={[isAnimated, setIsAnimated]} />
 
         <UserInfo />
         <CopyRight>&copy; 2024 by WorldWise Inc.</CopyRight>
@@ -56,11 +60,14 @@ const MapPage = () => {
         </CloseButton>
       </LeftSide>
       <RightSide>
-        <Map />
+        <Map onAddAnimation={handleAddAnimation} />
 
-        <OpenButton type="button" onClick={onLeftSideOpen}>
-          <RxHamburgerMenu />
-        </OpenButton>
+        <ButtonWrapper $isAnimated={isAnimated}>
+          <div></div>
+          <OpenButton type="button" onClick={onLeftSideOpen}>
+            <RxHamburgerMenu />
+          </OpenButton>
+        </ButtonWrapper>
         <UserInfo />
       </RightSide>
     </Wrapper>

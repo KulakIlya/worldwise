@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+
 import { selectPlaces } from '../../redux/map/selectors';
 
 const MapPlaceholder = ({ shouldRedirect = false }) => {

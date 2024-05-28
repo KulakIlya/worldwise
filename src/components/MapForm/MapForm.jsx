@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import Button from '../Button';
@@ -22,6 +22,10 @@ const VALIDATION_SCHEMA = Yup.object().shape({
 });
 
 const MapForm = () => {
+  const [, setIsAnimated] = useOutletContext();
+
+  const removeAnimation = () => setIsAnimated(false);
+
   const {
     register,
     handleSubmit,
@@ -41,11 +45,14 @@ const MapForm = () => {
 
   const onSubmit = ({ notes }) => {
     dispatch(addPlace({ ...selectPlace, notes }));
-
+    removeAnimation();
     navigate('cities');
   };
 
-  const backButtonClick = () => dispatch(resetPlace());
+  const backButtonClick = () => {
+    removeAnimation();
+    dispatch(resetPlace());
+  };
 
   return city ? (
     <Form onSubmit={handleSubmit(onSubmit)}>

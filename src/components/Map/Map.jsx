@@ -1,10 +1,10 @@
 import L from 'leaflet';
+import debounce from 'lodash.debounce';
 import { useEffect } from 'react';
 import { TileLayer, useMapEvents } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
-import debounce from 'lodash.debounce';
 import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { getCurrentPlace, getUserPlaces } from '../../redux/map/operations';
 import { selectCoords, selectPlace, selectPlaces } from '../../redux/map/selectors';
@@ -30,13 +30,15 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const showError = message => toast.error(message);
 
-const ChangeCenter = ({ center, onZoomChange }) => {
+const ChangeCenter = ({ onAddAnimation, center, onZoomChange }) => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const onMapClick = debounce(e => {
     if (e.originalEvent.target.tagName === 'BUTTON') return;
+
+    onAddAnimation();
 
     map.setView([e.latlng.lat, e.latlng.lng]);
 
@@ -62,7 +64,7 @@ const ChangeCenter = ({ center, onZoomChange }) => {
   return null;
 };
 
-const Map = () => {
+const Map = ({ onAddAnimation }) => {
   const [getConfig, changeConfig] = useLocalStorage();
 
   const handleZoomChange = newValue => changeConfig('zoom', newValue);
@@ -97,7 +99,11 @@ const Map = () => {
         <Markers places={places} />
         {currentPlace && <LocationMarker place={currentPlace} />}
         <LocationButton />
-        <ChangeCenter center={currentCoords} onZoomChange={handleZoomChange} />
+        <ChangeCenter
+          onAddAnimation={onAddAnimation}
+          center={currentCoords}
+          onZoomChange={handleZoomChange}
+        />
       </MapWrapper>
       <ToastContainer position="top-center" newestOnTop style={{ fontSize: '12px' }} />
     </>

@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import { rgba } from 'polished';
+import styled, { css, keyframes } from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -104,17 +105,61 @@ export const CloseButton = styled.button`
   }
 `;
 
-export const OpenButton = styled(CloseButton)`
+const clickMeAnimation = keyframes`
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
   position: absolute;
   z-index: 999;
-  top: 20px;
-  right: 20px;
 
-  color: ${props => props.theme.colors.colorDark1};
+  top: 25px;
+  right: 25px;
 
   @media screen and (min-width: 1024px) {
     display: none;
   }
+
+  & > div {
+    position: absolute;
+    z-index: -1;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background-color: ${props => rgba(props.theme.colors.colorBrand2, 0.8)};
+
+    ${props =>
+      props.$isAnimated
+        ? css`
+            animation: ${clickMeAnimation} 2s ease-in-out infinite;
+          `
+        : ''}
+  }
+`;
+
+export const OpenButton = styled(CloseButton)`
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  background-color: ${props => props.theme.colors.colorBrand2};
+  color: ${props => props.theme.colors.colorLight2};
+
+  border-radius: 50%;
 `;
 
 export const RightSide = styled.div`
